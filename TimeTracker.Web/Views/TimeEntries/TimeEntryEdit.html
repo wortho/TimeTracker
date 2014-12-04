@@ -1,0 +1,66 @@
+﻿<div class="container">
+    <header>
+        <h3><span class="glyphicon glyphicon-edit"></span>Time Entry: {{timeEntry.Id}}</h3>
+    </header>
+    <form name="editForm" novalidate>
+        <div class="customerEdit">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>{{ timeEntry.Description }}</h4>
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    Description:
+                </div>
+                <div class="col-md-10">
+                    <input type="text" name="Description" class="form-control" data-ng-model="timeEntry.Description" required />
+                    <span class="errorMessage" ng-show="editForm.Description.$touched && editForm.Description.$invalid">
+                        Description is required
+                    </span>
+                </div>
+                <div class="col-md-2">
+                    Start Time:
+                </div>
+                <div class="col-md-10">
+                    <input type="datetime" name="Start" class="form-control" data-ng-model="timeEntry.StartTime" required />
+                    <span class="errorMessage" ng-show="editForm.StartTime.$touched && editForm.StartTime.$invalid">
+                        Start Time is required
+                    </span>
+                </div>
+                <div class="col-md-2">
+                    End Time:
+                </div>
+                <div class="col-md-10">
+                    <input type="datetime" name="End" class="form-control" data-ng-model="timeEntry.EndTime" required />
+                    <span class="errorMessage" ng-show="editForm.EndTime.$touched && editForm.EndTime.$invalid">
+                        End Time is required
+                    </span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary" data-ng-click="updateTimeEntry()"
+                            ng-disabled="editForm.$invalid || !editForm.$dirty">
+                        {{buttonText}}
+                    </button>
+                </div>
+            </div>
+            <br />
+            <div class="statusRow">
+                <br />
+                <div class="label label-success" data-ng-show="updateStatus">
+                    <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;Time Entry updated!
+                </div>
+            </div>
+            <div class="statusRow">
+                <br />
+                <div class="label label-danger" data-ng-show="errorMessage">
+                    <span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;&nbsp;Error: {{ errorMessage }}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

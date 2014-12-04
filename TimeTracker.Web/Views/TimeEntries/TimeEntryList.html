@@ -1,0 +1,35 @@
+﻿<div class="container">
+    <header>
+        <h3><span class="glyphicon glyphicon-list"></span>{{title}}</h3>
+    </header>
+    <div class="row">
+        <div class="col-md-10">
+            <div>
+                <table class="table table-striped table-condensed">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>StartTime</th>
+                            <th>EndTime</th>
+                            <th>ProjectId</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-repeat="timeEntry in timeEntries | orderBy:orderby:reverse">
+                            <td><a href="#/timeEntry/{{timeEntry.Id}}">{{timeEntry.Id}}</a></td>
+                            <td><a href="#/timeEntry/{{timeEntry.Id}}">{{timeEntry.Description}}</a></td>
+                            <td><a href="#/timeEntry/{{timeEntry.Id}}">{{timeEntry.StartTime}}</a></td>
+                            <td><a href="#/timeEntry/{{timeEntry.Id}}">{{timeEntry.EndTime}}</a></td>
+                            <td><a href="#/project/{{timeEntry.ProjectId}}">{{timeEntry.ProjectId}}</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="statusRow" data-ng-show="status">
+                <span class="info">{{status}}</span>
+            </div>
+        </div>
+    </div>
+</div>

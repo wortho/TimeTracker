@@ -1,0 +1,83 @@
+﻿<div class="container">
+    <header>
+        <h3><span class="glyphicon glyphicon-edit"></span>{{title}}</h3>
+    </header>
+    <form name="editForm" novalidate>
+        <div class="customerEdit">
+            <div class="row">
+                <div class="col-md-12">
+                    <h4>{{ customer.ContactFirstName + ' ' + customer.ContactLastName }}</h4>
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    First Name:
+                </div>
+                <div class="col-md-10">
+                    <input type="text" name="ContactFirstName" class="form-control" data-ng-model="customer.ContactFirstName" required />
+                    <span class="errorMessage" ng-show="editForm.ContactFirstName.$touched && editForm.ContactFirstName.$invalid">
+                        First name is required
+                    </span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    Last Name:
+                </div>
+                <div class="col-md-10">
+                    <input type="text" name="ContactLastName" class="form-control" data-ng-model="customer.ContactLastName" required />
+                    <span class="errorMessage" ng-show="editForm.ContactLastName.$touched && editForm.ContactLastName.$invalid">
+                        Last name is required
+                    </span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-2">
+                    Email:
+                </div>
+                <div class="col-md-10">
+                    <!-- allowInvalid added below so that the model isn't wiped
+                    out (the default behavior) if email is determined to be invalid due to being a duplicate-->
+                    <input type="text" name="ContactEmail"
+                           class="form-control"
+                           data-ng-model="customer.ContactEmail"
+                           data-ng-model-options="{ updateOn: 'blur', allowInvalid: true }"
+                           data-wc-unique
+                           data-wc-unique-key="{{customer.Id}}"
+                           data-wc-unique-property="ContactEmail"
+                           data-ng-minlength="3"
+                           required />
+                    <!-- Show error if touched and unique is in error -->
+                    <span class="errorMessage" ng-show="editForm.ContactEmail.$touched && editForm.ContactEmail.$error.unique">
+                        Email already in use
+                    </span>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary" data-ng-click="updateCustomer()"
+                            ng-disabled="editForm.$invalid || !editForm.$dirty">
+                        {{buttonText}}
+                    </button>
+                </div>
+            </div>
+            <br />
+            <div class="statusRow">
+                <br />
+                <div class="label label-success" data-ng-show="updateStatus">
+                    <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;&nbsp;Customer updated!
+                </div>
+            </div>
+            <div class="statusRow">
+                <br />
+                <div class="label label-danger" data-ng-show="errorMessage">
+                    <span class="glyphicon glyphicon-thumbs-down"></span>&nbsp;&nbsp;Error: {{ errorMessage }}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
