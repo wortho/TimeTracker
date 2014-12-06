@@ -202,9 +202,6 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\TimeEntriesController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -224,9 +221,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jasmine\jasmine.css" />
+    <Content Include="Content\jasmine\jasmine_favicon.png" />
+    <Content Include="Content\loading-bar.css" />
+    <Content Include="Content\loading-bar.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -234,6 +234,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\TimeTrackerDemo.pubxml" />
+    <Content Include="Scripts\angular-local-storage.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular.js" />
@@ -242,9 +243,25 @@
     <Content Include="Scripts\angular-route.min.js.map" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\app\aboutController.js" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\customersController.js" />
+    <Content Include="Scripts\app\dataFactory.js" />
+    <Content Include="Scripts\app\homeController.js" />
+    <Content Include="Scripts\app\loginController.js" />
+    <Content Include="Scripts\app\projectsController.js" />
+    <Content Include="Scripts\app\services\authInterceptorService.js" />
+    <Content Include="Scripts\app\signupController.js" />
+    <Content Include="Scripts\app\indexController.js" />
+    <Content Include="Scripts\app\services\authService.js" />
+    <Content Include="Scripts\app\timeEntriesController.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\jasmine\boot.js" />
+    <Content Include="Scripts\jasmine\console.js" />
+    <Content Include="Scripts\jasmine\jasmine-html.js" />
+    <Content Include="Scripts\jasmine\jasmine.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -253,6 +270,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\loading-bar.js" />
+    <Content Include="Scripts\loading-bar.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
@@ -260,6 +279,10 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Index.html" />
+    <Content Include="Views\About.html" />
+    <Content Include="Views\Home.html" />
+    <Content Include="Views\Login.html" />
+    <Content Include="Views\Signup.html" />
     <Content Include="Views\TimeEntries\TimeEntryEdit.html" />
     <Content Include="Views\TimeEntries\TimeEntryList.html" />
     <Content Include="Views\Projects\ProjectEdit.html" />

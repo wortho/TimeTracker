@@ -10,6 +10,7 @@ using TimeTracker.Web.Repository;
 
 namespace TimeTracker.Web.Controllers
 {
+    [Authorize]
     public class CustomersController : ApiController
     {
         private ITimeTrackerContext context = new TimeTrackerContext();
