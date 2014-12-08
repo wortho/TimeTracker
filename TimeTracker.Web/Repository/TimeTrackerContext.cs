@@ -1,15 +1,22 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using TimeTracker.Web.Models;
 
 namespace TimeTracker.Web.Repository
 {
-    public class TimeTrackerContext: DbContext, ITimeTrackerContext
+    public class TimeTrackerContext: IdentityDbContext<ApplicationUser>, ITimeTrackerContext
     {
-        public TimeTrackerContext()
-            : base("DefaultConnection")
+        public TimeTrackerContext(string connectionString)
+            : base(connectionString)
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
+        }
+
+        public static TimeTrackerContext Create()
+        {
+            return new TimeTrackerContext("DefaultConnection");
         }
 
         // DEVELOPMENT ONLY: initialize the database
@@ -25,6 +32,24 @@ namespace TimeTracker.Web.Repository
         public void SetModified(object entity)
         {
             Entry(entity).State = EntityState.Modified;
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // use the AspNetIdentity tables for the User
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityRole>().HasKey<string>(r => r.Id).ToTable("AspNetRoles");
+
+            modelBuilder.Entity<IdentityUser>().ToTable("AspNetUsers");
+            
+            modelBuilder.Entity<IdentityUserLogin>().HasKey(l => new { l.UserId, l.LoginProvider, l.ProviderKey }).ToTable("AspNetUserLogins");
+
+
+            modelBuilder.Entity<IdentityUserRole>().HasKey(r => new { r.RoleId, r.UserId }).ToTable("AspNetUserRoles");
+
+            modelBuilder.Entity<IdentityUserClaim>().ToTable("AspNetUserClaims");
+
         }
 
     }

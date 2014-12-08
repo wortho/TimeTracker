@@ -38,30 +38,30 @@ namespace TimeTracker.Web.Tests.Controllers
             });
         }
 
-        [TestMethod]
-        public async Task Register()
-        {
+        //[TestMethod]
+        //public async Task Register()
+        //{
 
-            // Arrange
-            var model = new RegisterBindingModel()
-                {
-                    Email = "test@nowhere.com",
-                    Password = "P@ssword1",
-                    ConfirmPassword = "P@ssword1"
-                };
+        //    // Arrange
+        //    var model = new RegisterBindingModel()
+        //        {
+        //            Email = "test@nowhere.com",
+        //            Password = "P@ssword1",
+        //            ConfirmPassword = "P@ssword1"
+        //        };
 
          
-            await RunWithTestServer(async server =>
-             {
-                 // Act
-                 var response = await server.HttpClient.PostAsJsonAsync("api/Account/Register", model);
+        //    await RunWithTestServer(async server =>
+        //     {
+        //         // Act
+        //         var response = await server.HttpClient.PostAsJsonAsync("api/Account/Register", model);
 
-                 // Assert
-                 Assert.IsNotNull(response);
-                 var returnValue = await response.Content.ReadAsAsync<object>();
-                 Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, returnValue.ToString());
-             });
-        }
+        //         // Assert
+        //         Assert.IsNotNull(response);
+        //         var returnValue = await response.Content.ReadAsAsync<object>();
+        //         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, returnValue.ToString());
+        //     });
+        //}
 
 
         private static async Task RunWithTestServer(Func<TestServer, Task> test)

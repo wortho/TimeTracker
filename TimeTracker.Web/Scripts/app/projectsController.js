@@ -1,8 +1,8 @@
 ﻿'use strict';
-timeTrackerApp.controller('projectsController', [
-    '$scope', '$routeParams', 'dataFactory',
-    function($scope, $routeParams, dataFactory) {
-        var customerId = ($routeParams.customerId) ? parseInt($routeParams.customerId) : 0;
+timeTrackerApp.controller('projectsController',
+    ['$scope', '$route', '$routeParams', 'dataFactory',
+    function ($scope, $route, $routeParams, dataFactory) {
+            var customerId = ($routeParams.customerId) ? parseInt($routeParams.customerId) : 0;
 
         $scope.projects = [];
         $scope.orderby = 'CustomerId';
@@ -29,9 +29,9 @@ timeTrackerApp.controller('projectsController', [
     }
 ]);
 
-timeTrackerApp.controller('projectController', [
-    '$scope', 'dataFactory', '$routeParams',
-    function($scope, dataFactory, $routeParams) {
+timeTrackerApp.controller('projectController',
+    ['$scope', '$routeParams', '$timeout', 'dataFactory',
+    function ($scope, $routeParams, $timeout, dataFactory){
         var projectId = ($routeParams.projectId) ? parseInt($routeParams.projectId) : 0;
 
         $scope.project = {};

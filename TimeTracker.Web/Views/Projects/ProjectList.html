@@ -11,13 +11,15 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Customer</th>
+                            <th>Time Entries</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr data-ng-repeat="project in projects | orderBy:orderby:reverse">
                             <td><a href="#/project/{{project.Id}}">{{project.Id}}</a></td>
                             <td><a href="#/project/{{project.Id}}">{{project.Name}}</a></td>
-                            <td><a href="#/customer/{{project.CustomerId}}">{{project.CustomerId}}</a></td>
+                            <td><a href="#/customer/{{project.CustomerId}}">Customer {{project.CustomerId}}</a></td>
+                            <td><a href="#/timeEntries/project/{{project.Id}}">Time Entries</a></td>
                         </tr>
                     </tbody>
                 </table>

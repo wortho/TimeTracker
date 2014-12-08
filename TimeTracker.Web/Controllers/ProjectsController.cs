@@ -13,7 +13,7 @@ namespace TimeTracker.Web.Controllers
     [Authorize]
     public class ProjectsController : ApiController
     {
-        private readonly ITimeTrackerContext context = new TimeTrackerContext();
+        private readonly ITimeTrackerContext context = new TimeTrackerContext("DefaultConnection");
 
         public ProjectsController()
         {

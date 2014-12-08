@@ -13,7 +13,7 @@ namespace TimeTracker.Web.Controllers
     [Authorize]
     public class CustomersController : ApiController
     {
-        private ITimeTrackerContext context = new TimeTrackerContext();
+        private ITimeTrackerContext context = new TimeTrackerContext("DefaultConnection");
 
         public CustomersController()
         {

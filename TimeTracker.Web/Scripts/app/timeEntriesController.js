@@ -2,7 +2,7 @@
 timeTrackerApp.controller('timeEntriesController', [
     '$scope', '$routeParams', 'dataFactory',
     function ($scope, $routeParams, dataFactory) {
-        var projectId = ($routeParams.projectId) ? parseInt($routeParams.projectId) : 0;
+            var projectId = ($routeParams.projectId) ? parseInt($routeParams.projectId): 0;
 
         $scope.timeEntries = [];
         $scope.orderby = 'StartDate';
@@ -29,8 +29,8 @@ timeTrackerApp.controller('timeEntriesController', [
     }
 ]);
 
-timeTrackerApp.controller('timeEntryController', ['$scope', 'dataFactory', '$routeParams',
-    function ($scope, dataFactory, $routeParams) {
+timeTrackerApp.controller('timeEntryController', ['$scope', '$routeParams', '$timeout','dataFactory',
+    function ($scope, $routeParams, $timeout, dataFactory) {
         var timeEntryId = ($routeParams.timeEntryId) ? parseInt($routeParams.timeEntryId) : 0;
 
         $scope.timeEntry = {};
@@ -57,8 +57,14 @@ timeTrackerApp.controller('timeEntryController', ['$scope', 'dataFactory', '$rou
         }
 
         $scope.updateTimeEntry = function () {
-            var entry = $scope.timeEntry;
-            dataFactory.updateTimeEntry(entry).then(processSuccess, processError);
+            if ($scope.editForm.$valid) {
+                if (!$scope.timeEntry.id) {
+                    dataFactory.insertTimeEntry($scope.timeEntry).then(processSuccess, processError);
+                }
+                else {
+                    dataFactory.updateTimeEntry($scope.timeEntry).then(processSuccess, processError);
+                }
+            }
         };
 
         function processSuccess() {

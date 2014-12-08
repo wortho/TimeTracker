@@ -12,6 +12,15 @@
             </div>
             <div class="row">
                 <div class="col-md-2">
+                    Project Id:
+                </div>
+                <div class="col-md-10">
+                    <input type="text" name="ProjectId" class="form-control" data-ng-model="timeEntry.ProjectId" required />
+                    <span class="errorMessage" ng-show="editForm.ProjectId.$touched && editForm.ProjectId.$invalid">
+                        Project Id is required
+                    </span>
+                </div>
+                <div class="col-md-2">
                     Description:
                 </div>
                 <div class="col-md-10">

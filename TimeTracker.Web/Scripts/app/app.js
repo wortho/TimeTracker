@@ -24,23 +24,23 @@ timeTrackerApp.config([
                 controller: 'aboutController',
                 templateUrl: viewBase + 'About.html'
             })
-            .when('/customer/:customerId', {
+            .when('/customer/:customerId?', {
                 controller: 'customerController',
                 templateUrl: viewBase + 'Customers/CustomerEdit.html',
             })
-            .when('/projects/:customerId?', {
+            .when('/projects/customer/:customerId?', {
                 controller: 'projectsController',
                 templateUrl: viewBase + 'Projects/ProjectList.html',
             })
-            .when('/project/:projectId', {
+            .when('/project/:projectId?', {
                 controller: 'projectController',
                 templateUrl: viewBase + 'Projects/ProjectEdit.html',
             })
-            .when('/timeEntries/:projectId?', {
+            .when('/timeEntries/project/:projectId?', {
                 controller: 'timeEntriesController',
                 templateUrl: viewBase + 'TimeEntries/TimeEntryList.html',
             })
-            .when('/timeEntry/:timeEntryId', {
+            .when('/timeEntry/:timeEntryId?', {
                 controller: 'timeEntryController',
                 templateUrl: viewBase + 'TimeEntries/TimeEntryEdit.html',
             })

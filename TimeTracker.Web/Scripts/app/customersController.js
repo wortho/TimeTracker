@@ -1,5 +1,6 @@
 ﻿'use strict';
-timeTrackerApp.controller('customersController', ['$scope', 'dataFactory',
+timeTrackerApp.controller('customersController', 
+    ['$scope', 'dataFactory',
     function ($scope, dataFactory) {
 
         $scope.customers = [];
@@ -23,9 +24,9 @@ timeTrackerApp.controller('customersController', ['$scope', 'dataFactory',
     }
 ]);
 
-timeTrackerApp.controller('customerController', [
-    '$scope', '$routeParams', 'dataFactory',
-    function ($scope, $routeParams, dataFactory) {
+timeTrackerApp.controller('customerController', 
+    ['$scope', '$routeParams', '$timeout','dataFactory',
+    function ($scope, $routeParams, $timeout, dataFactory) {
         var customerId = ($routeParams.customerId) ? parseInt($routeParams.customerId) : 0;
 
         $scope.customer = {};

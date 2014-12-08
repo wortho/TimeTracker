@@ -26,8 +26,8 @@
                 <ul class="nav navbar-nav">
                     <li data-ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="#/customers">Customers</a></li>
-                    <li data-ng-hide="!authentication.isAuth"><a href="#/projects">Projects</a></li>
-                    <li data-ng-hide="!authentication.isAuth"><a href="#/timeEntries">Time Entries</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="#/projects/customer">Projects</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="#/timeEntry">Register Time</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
@@ -46,6 +46,7 @@
     <script src="/Scripts/angular-local-storage.js"></script>
     <script src="/Scripts/loading-bar.js"></script>
     <script src="/Scripts/common.js"></script>
+    <script src="/Scripts/bootstrap-datepicker.js"></script>
 
     <!-- Custom scripts -->
     <script src="/Scripts/app/app.js"></script>

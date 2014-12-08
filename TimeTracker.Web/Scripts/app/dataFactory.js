@@ -53,5 +53,12 @@ timeTrackerApp.factory('dataFactory', ['$http', function ($http) {
             return $http.put(urlBase + timeEntries + '/' + entry.Id, entry);
         };
 
+        dataFactory.insertTimeEntry = function (entry) {
+            return $http.post(urlBase + timeEntries, entry).then(function (results) {
+                entry.id = results.data.id;
+                return results.data;
+            });
+        };
+
         return dataFactory;
     }]);

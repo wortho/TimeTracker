@@ -96,7 +96,9 @@ namespace TimeTracker.Web.Tests.Controllers
             var project22 = new TimeEntry
             {
                 Id = 220,
-                ProjectId = 22
+                ProjectId = 22,
+                Description = "Test",
+                User = new ApplicationUser() {UserName = "Test1"}
             };
 
             // Act
@@ -120,7 +122,8 @@ namespace TimeTracker.Web.Tests.Controllers
             {
                 Id = 110,
                 ProjectId = 11,
-                Description = "Project11Updated"
+                Description = "Project11Updated",
+                User = new ApplicationUser() {UserName = "Test1"}
             };
 
             // Act
@@ -143,7 +146,8 @@ namespace TimeTracker.Web.Tests.Controllers
             {
                 Id = 1100,
                 ProjectId = 11,
-                Description = "1100Updated"
+                Description = "1100Updated",
+                User = new ApplicationUser() {UserName = "Test1"}
             };
 
             // Act
@@ -166,7 +170,8 @@ namespace TimeTracker.Web.Tests.Controllers
             {
                 Id = 42,
                 ProjectId = 11,
-                Description = "1100Updated"
+                Description = "1100Updated",
+                User = new ApplicationUser() { UserName = "Test1" }
             };
 
             // Act

@@ -17,7 +17,7 @@ timeTrackerApp.controller('loginController', ['$scope', '$location', 'authServic
 
         },
          function (err) {
-             $scope.message = err.description;
+             $scope.message = err.message + ' '+err.error_description;
          });
     };
     

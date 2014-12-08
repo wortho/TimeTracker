@@ -2,9 +2,12 @@
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using TimeTracker.Web.Models;
 using TimeTracker.Web.Repository;
 
@@ -13,7 +16,7 @@ namespace TimeTracker.Web.Controllers
     [Authorize]
     public class TimeEntriesController : ApiController
     {
-        private readonly ITimeTrackerContext context = new TimeTrackerContext();
+        private readonly ITimeTrackerContext context = new TimeTrackerContext("DefaultConnection");
 
         public TimeEntriesController()
         {
@@ -23,6 +26,19 @@ namespace TimeTracker.Web.Controllers
         public TimeEntriesController(ITimeTrackerContext context)
         {
             this.context = context;
+        }
+
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
 
         // GET: api/TimeEntries
@@ -87,6 +103,8 @@ namespace TimeTracker.Web.Controllers
             {
                 return BadRequest(ModelState);
             }
+            var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            timeEntry.UserId = currentUser.Id;
 
             context.TimeEntries.Add(timeEntry);
             await context.SaveChangesAsync();
