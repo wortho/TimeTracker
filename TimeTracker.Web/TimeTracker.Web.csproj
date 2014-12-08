@@ -233,6 +233,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <None Include="Properties\PublishProfiles\TimeTrackerDemo %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\TimeTrackerDemo.pubxml" />
     <Content Include="Scripts\angular-local-storage.js" />
     <Content Include="Scripts\angular-route.js" />

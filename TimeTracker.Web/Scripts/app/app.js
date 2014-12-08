@@ -1,5 +1,4 @@
 ﻿var timeTrackerApp = angular.module('timeTrackerApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
-
 timeTrackerApp.config([
     '$routeProvider', function($routeProvider) {
         var viewBase = '/views/';
@@ -40,7 +39,11 @@ timeTrackerApp.config([
                 controller: 'timeEntriesController',
                 templateUrl: viewBase + 'TimeEntries/TimeEntryList.html',
             })
-            .when('/timeEntry/:timeEntryId?', {
+            .when('/timeEntry/:timeEntryId', {
+                controller: 'timeEntryController',
+                templateUrl: viewBase + 'TimeEntries/TimeEntryEdit.html',
+            })
+            .when('/timeEntry/new/:projectId', {
                 controller: 'timeEntryController',
                 templateUrl: viewBase + 'TimeEntries/TimeEntryEdit.html',
             })

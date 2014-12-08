@@ -4,7 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
-    <!--<link href="/Content/bootstrap-theme.min.css" rel="stylesheet" />-->
     <link href="/Content/loading-bar.min.css" rel="stylesheet" />
     <link href="/Content/site.css" rel="stylesheet" />
     <title>TimeTracker</title>
@@ -27,7 +26,6 @@
                     <li data-ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="#/customers">Customers</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="#/projects/customer">Projects</a></li>
-                    <li data-ng-hide="!authentication.isAuth"><a href="#/timeEntry">Register Time</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
@@ -46,7 +44,6 @@
     <script src="/Scripts/angular-local-storage.js"></script>
     <script src="/Scripts/loading-bar.js"></script>
     <script src="/Scripts/common.js"></script>
-    <script src="/Scripts/bootstrap-datepicker.js"></script>
 
     <!-- Custom scripts -->
     <script src="/Scripts/app/app.js"></script>

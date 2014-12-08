@@ -2,7 +2,7 @@
 timeTrackerApp.controller('timeEntriesController', [
     '$scope', '$routeParams', 'dataFactory',
     function ($scope, $routeParams, dataFactory) {
-            var projectId = ($routeParams.projectId) ? parseInt($routeParams.projectId): 0;
+        var projectId = ($routeParams.projectId) ? parseInt($routeParams.projectId) : 0;
 
         $scope.timeEntries = [];
         $scope.orderby = 'StartDate';
@@ -10,6 +10,7 @@ timeTrackerApp.controller('timeEntriesController', [
         $scope.status = 'starting';
         $scope.title = 'Time Entries';
         if (projectId > 0) {
+            $scope.projectId = projectId;
             $scope.title = 'Project ' + projectId + ' Time Entries';
         }
 
@@ -29,11 +30,15 @@ timeTrackerApp.controller('timeEntriesController', [
     }
 ]);
 
-timeTrackerApp.controller('timeEntryController', ['$scope', '$routeParams', '$timeout','dataFactory',
-    function ($scope, $routeParams, $timeout, dataFactory) {
+timeTrackerApp.controller('timeEntryController', ['$scope', '$location', '$routeParams', '$timeout', 'dataFactory',
+    function ($scope, $location, $routeParams, $timeout, dataFactory) {
         var timeEntryId = ($routeParams.timeEntryId) ? parseInt($routeParams.timeEntryId) : 0;
 
         $scope.timeEntry = {};
+        var projectId = ($routeParams.projectId) ? parseInt($routeParams.projectId) : 0;
+        if (projectId > 0) {
+            $scope.timeEntry.ProjectId = projectId;
+        }
         $scope.states = [];
         $scope.title = (timeEntryId > 0) ? 'Edit' : 'Add';
         $scope.buttonText = (timeEntryId > 0) ? 'Update' : 'Add';
@@ -44,7 +49,9 @@ timeTrackerApp.controller('timeEntryController', ['$scope', '$routeParams', '$ti
             return timeEntryStateId === stateId;
         };
 
-        getTimeEntry(timeEntryId);
+        if (timeEntryId > 0) {
+            getTimeEntry(timeEntryId);
+        }
 
         function getTimeEntry(id) {
             dataFactory.getTimeEntry(id)
@@ -58,7 +65,7 @@ timeTrackerApp.controller('timeEntryController', ['$scope', '$routeParams', '$ti
 
         $scope.updateTimeEntry = function () {
             if ($scope.editForm.$valid) {
-                if (!$scope.timeEntry.id) {
+                if (!$scope.timeEntry.Id) {
                     dataFactory.insertTimeEntry($scope.timeEntry).then(processSuccess, processError);
                 }
                 else {
@@ -67,16 +74,21 @@ timeTrackerApp.controller('timeEntryController', ['$scope', '$routeParams', '$ti
             }
         };
 
-        function processSuccess() {
+        function processSuccess(data) {
             $scope.editForm.$dirty = false;
             $scope.updateStatus = true;
-            $scope.title = 'Edit';
-            $scope.buttonText = 'Update';
-            startTimer();
+            if (!$scope.timeEntry.Id) {
+                $location.path('/timeEntry/' + data.Id);
+            }
+            else {
+                $scope.title = 'Edit';
+                $scope.buttonText = 'Update';
+                startTimer();
+            }
         }
 
         function processError(error) {
-            $scope.errorMessage = error.message;
+            $scope.errorMessage = 'An error occurred: ' + error.message;
             startTimer();
         }
 

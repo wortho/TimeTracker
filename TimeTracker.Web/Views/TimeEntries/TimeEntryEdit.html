@@ -5,12 +5,6 @@
     <form name="editForm" novalidate>
         <div class="customerEdit">
             <div class="row">
-                <div class="col-md-12">
-                    <h4>{{ timeEntry.Description }}</h4>
-                    <br />
-                </div>
-            </div>
-            <div class="row">
                 <div class="col-md-2">
                     Project Id:
                 </div>
@@ -24,7 +18,7 @@
                     Description:
                 </div>
                 <div class="col-md-10">
-                    <input type="text" name="Description" class="form-control" data-ng-model="timeEntry.Description" required />
+                    <input type="text" name="Description" placeholder="Describe the work done" class="form-control" data-ng-model="timeEntry.Description" required />
                     <span class="errorMessage" ng-show="editForm.Description.$touched && editForm.Description.$invalid">
                         Description is required
                     </span>
@@ -33,7 +27,7 @@
                     Start Time:
                 </div>
                 <div class="col-md-10">
-                    <input type="datetime" name="Start" class="form-control" data-ng-model="timeEntry.StartTime" required />
+                    <input type="datetime" name="Start" class="form-control" data-ng-model="timeEntry.StartTime" required placeholder="08:00"/>
                     <span class="errorMessage" ng-show="editForm.StartTime.$touched && editForm.StartTime.$invalid">
                         Start Time is required
                     </span>
@@ -42,7 +36,7 @@
                     End Time:
                 </div>
                 <div class="col-md-10">
-                    <input type="datetime" name="End" class="form-control" data-ng-model="timeEntry.EndTime" required />
+                    <input type="datetime" name="End" class="form-control" data-ng-model="timeEntry.EndTime" required placeholder="16:00" />
                     <span class="errorMessage" ng-show="editForm.EndTime.$touched && editForm.EndTime.$invalid">
                         End Time is required
                     </span>

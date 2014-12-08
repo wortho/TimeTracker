@@ -55,7 +55,6 @@ timeTrackerApp.factory('dataFactory', ['$http', function ($http) {
 
         dataFactory.insertTimeEntry = function (entry) {
             return $http.post(urlBase + timeEntries, entry).then(function (results) {
-                entry.id = results.data.id;
                 return results.data;
             });
         };
