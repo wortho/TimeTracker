@@ -1,6 +1,6 @@
 ﻿var timeTrackerApp = angular.module('timeTrackerApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
 timeTrackerApp.config([
-    '$routeProvider', function($routeProvider) {
+    '$routeProvider', function ($routeProvider) {
         var viewBase = '/views/';
         $routeProvider
             .when('/home', {
@@ -51,17 +51,18 @@ timeTrackerApp.config([
     }
 ]);
 
-timeTrackerApp.constant('ngAuthSettings', {clientId: 'ngAuthApp'});
+timeTrackerApp.constant('ngAuthSettings', { clientId: 'ngAuthApp' });
 
 timeTrackerApp.config(function ($httpProvider) {
     $httpProvider.interceptors.push('authInterceptorService');
-    });
+});
 
 timeTrackerApp.config(function (localStorageServiceProvider) {
-  localStorageServiceProvider.setPrefix('yourAppName');
+    localStorageServiceProvider.setPrefix('yourAppName');
 });
 
 timeTrackerApp.run(['authService', function (authService) {
     authService.fillAuthData();
 }]);
+
 

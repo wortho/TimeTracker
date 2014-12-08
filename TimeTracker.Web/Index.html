@@ -25,7 +25,6 @@
                 <ul class="nav navbar-nav">
                     <li data-ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="#/customers">Customers</a></li>
-                    <li data-ng-hide="!authentication.isAuth"><a href="#/projects/customer">Projects</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
                     <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
@@ -38,7 +37,6 @@
             <div data-ng-view id="ng-view"></div>
         </section>
     </div>
-
     <script src="/Scripts/angular.js"></script>
     <script src="/Scripts/angular-route.js"></script>
     <script src="/Scripts/angular-local-storage.js"></script>
@@ -47,7 +45,7 @@
 
     <!-- Custom scripts -->
     <script src="/Scripts/app/app.js"></script>
-    
+
     <!-- Load services -->
     <script src="/Scripts/app/Services/authInterceptorService.js"></script>
     <script src="/Scripts/app/services/authService.js"></script>

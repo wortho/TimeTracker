@@ -125,11 +125,17 @@ namespace TimeTracker.Web.Controllers
 
 
         [Route("api/Projects/{id}/TimeEntries")]
-        public IQueryable<TimeEntry> GetTimeEntriesForProject(int id)
+        public async Task<IHttpActionResult> GetTimeEntriesForProject(int id)
         {
-            return context.TimeEntries.AsQueryable()
-                .Where(t => t.ProjectId == id)
-                .OrderBy(t => t.StartTime);
+            Project project = await context.Projects.FindAsync(id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+
+            await context.Entry(project).Collection("TimeEntries").LoadAsync();
+
+            return Ok(project.TimeEntries);
         }
     }
 }

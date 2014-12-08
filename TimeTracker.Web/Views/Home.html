@@ -8,17 +8,30 @@
             <span class="info">Enables you to an overview of your time registrations, so that you can create correct invoices for my customers.</span>
         </div>
     </div>
-    <div class="row" data-ng-hide="authentication.isAuth">
-        <div class="col-md-4">
-            <h2>Login</h2>
-            <p><a class="btn btn-info" href="#/login" role="button">Login &raquo;</a></p>
+    <br/>
+    <div class="row" data-ng-hide="!authentication.isAuth">
+        <div class="col-md-6">
+            <ol>
+                <li><span class="info">Choose a Customer from the list of </span><a href="#/customers">Customers</a></li>
+                <li><span class="info">Choose a Projects Link to view the list of existing projects for the Customer</span></li>
+                <li><span class="info">Choose a Time Entries Link to view the list of existing time entries for the Project</span></li>
+                <li><span class="info">Click on the Register Time Button to add a new time entry for the Project</span></li>
+            </ol>
         </div>
-        <div class="col-md-4">
-            <h2>Sign Up</h2>
-            <p><a class="btn btn-info" href="#/signup" role="button">Sign Up &raquo;</a></p>
-        </div>
-        <div class="col-md-2">
-            &nbsp;
+    </div>
+    <div class="col-md-4">
+        <div class="row" data-ng-hide="authentication.isAuth">
+            <div class="col-md-4">
+                <h2>Login</h2>
+                <p><a class="btn btn-info" href="#/login" role="button">Login &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Sign Up</h2>
+                <p><a class="btn btn-info" href="#/signup" role="button">Sign Up &raquo;</a></p>
+            </div>
+            <div class="col-md-2">
+                &nbsp;
+            </div>
         </div>
     </div>
 </div>

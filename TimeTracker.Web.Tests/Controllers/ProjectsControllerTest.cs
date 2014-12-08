@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -210,11 +212,11 @@ namespace TimeTracker.Web.Tests.Controllers
             var controller = new ProjectsController(context.Object);
 
             // Act
-            IQueryable<TimeEntry> actual = controller.GetTimeEntriesForProject(projects[0].Id);
+            var actual = controller.GetTimeEntriesForProject(projects[0].Id);
 
             // Assert
             Assert.IsNotNull(actual);
-            Assert.AreEqual(3, actual.AsEnumerable().Count());
+            Assert.IsNotNull(actual.Result);
         }
     }
 }

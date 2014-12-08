@@ -19,7 +19,6 @@ namespace TimeTracker.Web
             var config = new HttpConfiguration();
             WebApiConfig.Register(config);
             app.UseWebApi(config);
-            app.UseStaticFiles();
             app.UseStageMarker(PipelineStage.MapHandler);
 
         }
