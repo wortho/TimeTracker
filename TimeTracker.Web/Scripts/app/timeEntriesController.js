@@ -44,7 +44,7 @@ timeTrackerApp.controller('timeEntryController', ['$scope', '$location', '$route
         $scope.buttonText = (timeEntryId > 0) ? 'Update' : 'Add';
         $scope.updateStatus = false;
         $scope.errorMessage = '';
-
+        
         $scope.isStateSelected = function (timeEntryStateId, stateId) {
             return timeEntryStateId === stateId;
         };
@@ -62,6 +62,8 @@ timeTrackerApp.controller('timeEntryController', ['$scope', '$location', '$route
                     $scope.status = 'Unable to project load data: ' + error.message;
                 });
         }
+
+
 
         $scope.updateTimeEntry = function () {
             if ($scope.editForm.$valid) {
@@ -98,6 +100,14 @@ timeTrackerApp.controller('timeEntryController', ['$scope', '$location', '$route
                 $scope.errorMessage = '';
                 $scope.updateStatus = false;
             }, 3000);
+        }
+
+        $scope.getDiffAsHours = function () {
+            if (($scope.timeEntry.StartTime) && ($scope.timeEntry.EndTime)) {
+                return moment.duration(moment(new Date($scope.timeEntry.EndTime)).diff(moment(new Date($scope.timeEntry.StartTime)))).humanize();
+            } else {
+                return null;
+            }
         }
 
     }]);

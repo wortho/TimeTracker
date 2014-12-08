@@ -38,8 +38,10 @@
                 <div class="col-md-10">
                     <input type="datetime" name="End" class="form-control" data-ng-model="timeEntry.EndTime" required placeholder="16:00" />
                     <span class="errorMessage" ng-show="editForm.EndTime.$touched && editForm.EndTime.$invalid">
-                        End Time is required
+                        End Time is required 
                     </span>
+                </div>
+                <div class="col-md-10"><span class="info">The time registered is: {{getDiffAsHours()}}</span>
                 </div>
             </div>
             <br />

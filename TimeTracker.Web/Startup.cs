@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
-using Microsoft.Owin;
+﻿using Microsoft.Owin;
 using Microsoft.Owin.Extensions;
-using Microsoft.Owin.StaticFiles;
 using Owin;
+using System.Web.Http;
+using TimeTracker.Web;
 
-[assembly: OwinStartup(typeof(TimeTracker.Web.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
 namespace TimeTracker.Web
 {
@@ -15,12 +12,12 @@ namespace TimeTracker.Web
     {
         public void Configuration(IAppBuilder app)
         {
+            SimpleLogger.ConfigureLogger(app);
             ConfigureAuth(app);
             var config = new HttpConfiguration();
             WebApiConfig.Register(config);
             app.UseWebApi(config);
             app.UseStageMarker(PipelineStage.MapHandler);
-
         }
     }
 }
