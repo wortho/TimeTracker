@@ -247,6 +247,10 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\app\aboutController.js" />
+    <Content Include="Scripts\app\customersControllerSpec.js" />
+    <Content Include="Scripts\app\indexControllerSpec.js" />
+    <Content Include="Scripts\app\homeControllerSpec.js" />
+    <Content Include="Scripts\app\aboutControllerSpec.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\customersController.js" />
     <Content Include="Scripts\app\dataFactory.js" />
@@ -288,6 +292,7 @@
     <Content Include="Index.html" />
     <Content Include="Views\About.html" />
     <Content Include="Views\Home.html" />
+    <Content Include="Views\Jasmine\SpecRunner.html" />
     <Content Include="Views\Login.html" />
     <Content Include="Views\Signup.html" />
     <Content Include="Views\TimeEntries\TimeEntryEdit.html" />

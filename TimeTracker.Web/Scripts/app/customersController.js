@@ -6,12 +6,11 @@ timeTrackerApp.controller('customersController',
         $scope.customers = [];
         $scope.orderby = 'Id';
         $scope.reverse = false;
-        $scope.status = 'starting';
+        $scope.status = '';
         $scope.title = 'Customers';
         getCustomers();
 
         function getCustomers() {
-            $scope.status = 'loading';
             dataFactory.getCustomers()
                 .success(function (custs) {
                     $scope.customers = custs;

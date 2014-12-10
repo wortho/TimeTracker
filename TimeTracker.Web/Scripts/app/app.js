@@ -58,7 +58,7 @@ timeTrackerApp.config(function ($httpProvider) {
 });
 
 timeTrackerApp.config(function (localStorageServiceProvider) {
-    localStorageServiceProvider.setPrefix('yourAppName');
+    localStorageServiceProvider.setPrefix('timeTrackerApp');
 });
 
 timeTrackerApp.run(['authService', function (authService) {
