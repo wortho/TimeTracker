@@ -10,13 +10,13 @@
 ///<reference path="~/Scripts/App/app.js"/>
 ///<reference path="~/Scripts/App/aboutController.js"/>
 
-describe("AboutControllerSpec", function () {
+describe("AboutController Spec", function () {
 
     beforeEach(module("timeTrackerApp"));
 
     it('should create an about view with title', inject(function ($controller) {
         var scope = {},
-            ctrl = $controller('AboutController', { $scope: scope });
+            ctrl = $controller('aboutController', { $scope: scope });
         expect(scope.title).toBe("About Time Tracker");
     }));
 
