@@ -1,24 +1,18 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+﻿using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using TimeTracker.Web.Models;
-using TimeTracker.Web.Repository;
+using TimeTracker.Model;
 
 namespace TimeTracker.Web.Controllers
 {
     [Authorize]
     public class CustomersController : ApiController
     {
-        private ITimeTrackerContext context = new TimeTrackerContext("DefaultConnection");
+        private ITimeTrackerContext context; // = new TimeTrackerContext("DefaultConnection");
 
-        public CustomersController()
-        {
-            
-        }
         public CustomersController(ITimeTrackerContext context)
         {
             this.context = context;

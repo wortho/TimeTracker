@@ -1,9 +1,8 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using TimeTracker.Web.Models;
+using TimeTracker.Model;
 
-namespace TimeTracker.Web.Repository
+namespace TimeTracker.Repository
 {
     public class TimeTrackerContext: IdentityDbContext<ApplicationUser>, ITimeTrackerContext
     {

@@ -11,8 +11,8 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
-using TimeTracker.Web.Models;
+using TimeTracker.Model;
+using TimeTracker.Repository;
 
 namespace TimeTracker.Web.Controllers
 {
@@ -22,11 +22,7 @@ namespace TimeTracker.Web.Controllers
     {
         private const string LocalLoginProvider = "Local";
         private ApplicationUserManager _userManager;
-
-        public AccountController()
-        {
-        }
-
+        
         public AccountController(ApplicationUserManager userManager,
             ISecureDataFormat<AuthenticationTicket> accessTokenFormat)
         {

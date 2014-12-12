@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using TimeTracker.Web.Models;
+using TimeTracker.Model;
 
 namespace TimeTracker.Web.Tests.Controllers
 {

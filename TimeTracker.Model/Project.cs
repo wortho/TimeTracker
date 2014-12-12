@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TimeTracker.Web.Models
+namespace TimeTracker.Model
 {
     public class Project
     {

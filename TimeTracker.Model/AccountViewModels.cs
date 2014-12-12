@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace TimeTracker.Web.Models
+namespace TimeTracker.Model
 {
     // Models returned by AccountController actions.
     

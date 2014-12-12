@@ -4,8 +4,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
+using TimeTracker.Repository;
 using TimeTracker.Web.Providers;
-using TimeTracker.Web.Repository;
 
 namespace TimeTracker.Web
 {
@@ -20,7 +20,7 @@ namespace TimeTracker.Web
         {
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(TimeTrackerContext.Create);
-            app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
+            app.CreatePerOwinContext<ApplicationUserManager>(UserManagerFactory.Create);
 
             // Enable the application to use a cookie to store information for the signed in user
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider

@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TimeTracker.Web.Models;
-using TimeTracker.Web.Repository;
+using TimeTracker.Model;
 
-namespace TimeTracker.Web.Tests.Repository
+namespace TimeTracker.Repository.Tests
 {
     [TestClass]
     public class TimeTrackerContextTest
@@ -31,7 +30,7 @@ namespace TimeTracker.Web.Tests.Repository
 
             context.Customers.Add(cust);
             Assert.IsNotNull(cust);
-            Assert.AreEqual("Test Customer", cust.CompanyName);
+            Assert.AreEqual<string>("Test Customer", cust.CompanyName);
             cust.CompanyName = cust.CompanyName + "Mod";
             context.SaveChanges();
 
@@ -66,18 +65,18 @@ namespace TimeTracker.Web.Tests.Repository
                 .Where(e => e.ProjectId == proj.Id)
                 .OrderBy(e => e.StartTime);
 
-            Assert.AreEqual(4, entries.Count());
+            Assert.AreEqual<int>(4, entries.Count());
 
             context.Entry(proj).Collection(p => p.TimeEntries).Load();
-            Assert.AreEqual(4, proj.TimeEntries.Count);
+            Assert.AreEqual<int>(4, proj.TimeEntries.Count);
 
             TimeEntry t = proj.TimeEntries.First();
             context.Entry(t).Reference(e => e.User).Load();
 
-            Assert.AreEqual(user.UserName, t.User.UserName);
+            Assert.AreEqual<string>(user.UserName, t.User.UserName);
 
             context.Entry(t).Reference(e => e.Project).Load();
-            Assert.AreEqual(t.Project.Id, proj.Id);
+            Assert.AreEqual<int>(t.Project.Id, proj.Id);
         }
 
         [TestMethod]

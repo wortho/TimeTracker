@@ -1,5 +1,4 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+﻿using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -8,21 +7,16 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using TimeTracker.Web.Models;
-using TimeTracker.Web.Repository;
+using TimeTracker.Model;
+using TimeTracker.Repository;
 
 namespace TimeTracker.Web.Controllers
 {
     [Authorize]
     public class TimeEntriesController : ApiController
     {
-        private readonly ITimeTrackerContext context = new TimeTrackerContext("DefaultConnection");
-
-        public TimeEntriesController()
-        {
-            
-        }
-
+        private readonly ITimeTrackerContext context; // = new TimeTrackerContext("DefaultConnection");
+        
         public TimeEntriesController(ITimeTrackerContext context)
         {
             this.context = context;

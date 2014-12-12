@@ -3,10 +3,9 @@ using System.Data.Entity;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using TimeTracker.Web.Models;
-using TimeTracker.Web.Repository;
+using TimeTracker.Model;
 
-namespace TimeTracker.Web.Tests
+namespace TimeTracker.Repository.Tests
 {
     [TestClass]
     public class TimeTrackerDatabaseInitializerTest
@@ -33,8 +32,8 @@ namespace TimeTracker.Web.Tests
             TimeTrackerDatabaseInitializer.GenerateSeedData(context.Object);
 
             //Assert
-            Assert.AreEqual(6, context.Object.Customers.Count());
-            Assert.AreEqual(24, context.Object.Projects.Count());
+            Assert.AreEqual<int>(6, context.Object.Customers.Count());
+            Assert.AreEqual<int>(24, context.Object.Projects.Count());
         }
 
 

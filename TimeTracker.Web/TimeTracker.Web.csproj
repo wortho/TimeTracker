@@ -195,25 +195,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppBuilderExtensions.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\AppDependencyResolver.cs" />
     <Compile Include="App_Start\SimpleLogger.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\UserManagerFactory.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\TimeEntriesController.cs" />
-    <Compile Include="Models\AccountBindingModels.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Customer.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\Project.cs" />
-    <Compile Include="Models\TimeEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
-    <Compile Include="Repository\ITimeTrackerContext.cs" />
-    <Compile Include="Repository\TimeTrackerContext.cs" />
-    <Compile Include="Repository\TimeTrackerDatabaseInitializer.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="App_Start\SimpleLoggerOptions.cs" />
     <Compile Include="Startup.cs" />
@@ -313,13 +305,22 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TimeTracker.Model\TimeTracker.Model.csproj">
+      <Project>{0554F09F-EABD-4E5E-90B9-13F9F3349605}</Project>
+      <Name>TimeTracker.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TimeTracker.Repository\TimeTracker.Repository.csproj">
+      <Project>{92C3CF48-85C0-4EF1-B952-65F932D83D28}</Project>
+      <Name>TimeTracker.Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

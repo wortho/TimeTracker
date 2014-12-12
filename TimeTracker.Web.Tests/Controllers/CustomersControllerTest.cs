@@ -7,8 +7,7 @@ using System.Web.Http.Results;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TimeTracker.Web.Controllers;
-using TimeTracker.Web.Models;
-using TimeTracker.Web.Repository;
+using TimeTracker.Model;
 
 namespace TimeTracker.Web.Tests.Controllers
 {

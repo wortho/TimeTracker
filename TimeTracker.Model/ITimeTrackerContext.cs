@@ -2,9 +2,8 @@
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Threading.Tasks;
-using TimeTracker.Web.Models;
 
-namespace TimeTracker.Web.Repository
+namespace TimeTracker.Model
 {
     public interface ITimeTrackerContext : IDisposable
     {

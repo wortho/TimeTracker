@@ -1,32 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
-using System.Web.Http;
 using Microsoft.Owin.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TimeTracker.Web;
 using TimeTracker.Web.Controllers;
-using TimeTracker.Web.Models;
 
 namespace TimeTracker.Web.Tests.Controllers
 {
     [TestClass]
     public class AccountControllerTest
     {
-        [TestMethod]
-        public void AccountController()
-        {
-            // Arrange Act
-            AccountController controller = new AccountController();
-
-            // Assert
-            Assert.IsNotNull(controller);
-        }
-
+        
         [TestMethod]
         public async Task GetUserInfo()
         {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Data.Entity;
-using TimeTracker.Web.Models;
+using TimeTracker.Model;
 
-namespace TimeTracker.Web.Repository
+namespace TimeTracker.Repository
 {
     public class TimeTrackerDatabaseInitializer : CreateDatabaseIfNotExists<TimeTrackerContext>
     {
