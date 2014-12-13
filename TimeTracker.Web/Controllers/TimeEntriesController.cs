@@ -1,51 +1,41 @@
-﻿using System.Data.Entity.Infrastructure;
+﻿using System;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using TimeTracker.Model;
-using TimeTracker.Repository;
 
 namespace TimeTracker.Web.Controllers
 {
     [Authorize]
-    public class TimeEntriesController : ApiController
+    public class TimeEntriesController : TimeTrackerController
     {
-        private readonly ITimeTrackerContext context; // = new TimeTrackerContext("DefaultConnection");
-        
-        public TimeEntriesController(ITimeTrackerContext context)
+        internal TimeEntriesController()
         {
-            this.context = context;
+            GetCurrentUserId = () => User.Identity.GetUserId();
         }
 
-        private ApplicationUserManager _userManager;
-        public ApplicationUserManager UserManager
+        public TimeEntriesController(ITimeTrackerContext context)
         {
-            get
-            {
-                return _userManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            }
-            private set
-            {
-                _userManager = value;
-            }
+            this.Context = context;
         }
+        
+        public Func<string> GetCurrentUserId;
 
         // GET: api/TimeEntries
         public IQueryable<TimeEntry> GetTimeEntries()
         {
-            return context.TimeEntries;
+            return Context.TimeEntries;
         }
 
         // GET: api/TimeEntries/5
         [ResponseType(typeof(TimeEntry))]
         public async Task<IHttpActionResult> GetTimeEntry(int id)
         {
-            TimeEntry timeEntry = await context.TimeEntries.FindAsync(id);
+            TimeEntry timeEntry = await Context.TimeEntries.FindAsync(id);
             if (timeEntry == null)
             {
                 return NotFound();
@@ -68,11 +58,11 @@ namespace TimeTracker.Web.Controllers
                 return BadRequest();
             }
 
-            context.SetModified(timeEntry);
+            Context.SetModified(timeEntry);
 
             try
             {
-                await context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -97,11 +87,11 @@ namespace TimeTracker.Web.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var currentUser = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            timeEntry.UserId = currentUser.Id;
 
-            context.TimeEntries.Add(timeEntry);
-            await context.SaveChangesAsync();
+            timeEntry.UserId = GetCurrentUserId();
+
+            Context.TimeEntries.Add(timeEntry);
+            await Context.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = timeEntry.Id }, timeEntry);
         }
@@ -110,14 +100,14 @@ namespace TimeTracker.Web.Controllers
         [ResponseType(typeof(TimeEntry))]
         public async Task<IHttpActionResult> DeleteTimeEntry(int id)
         {
-            TimeEntry timeEntry = await context.TimeEntries.FindAsync(id);
+            TimeEntry timeEntry = await Context.TimeEntries.FindAsync(id);
             if (timeEntry == null)
             {
                 return NotFound();
             }
 
-            context.TimeEntries.Remove(timeEntry);
-            await context.SaveChangesAsync();
+            Context.TimeEntries.Remove(timeEntry);
+            await Context.SaveChangesAsync();
 
             return Ok(timeEntry);
         }
@@ -126,14 +116,14 @@ namespace TimeTracker.Web.Controllers
         {
             if (disposing)
             {
-                context.Dispose();
+                Context.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool TimeEntryExists(int id)
         {
-            return context.TimeEntries.Count(e => e.Id == id) > 0;
+            return Context.TimeEntries.Count(e => e.Id == id) > 0;
         }
     }
 }

@@ -9,26 +9,29 @@ using TimeTracker.Model;
 namespace TimeTracker.Web.Controllers
 {
     [Authorize]
-    public class CustomersController : ApiController
+    public class CustomersController : TimeTrackerController
     {
-        private ITimeTrackerContext context; // = new TimeTrackerContext("DefaultConnection");
+        internal CustomersController()
+        {
+
+        }
 
         public CustomersController(ITimeTrackerContext context)
         {
-            this.context = context;
+            this.Context = context;
         }
 
         // GET: api/Customers
         public IQueryable<Customer> GetCustomers()
         {
-            return context.Customers;
+            return Context.Customers;
         }
 
         // GET: api/Customers/5
         [ResponseType(typeof(Customer))]
         public async Task<IHttpActionResult> GetCustomer(int id)
         {
-            Customer customer = await context.Customers.FindAsync(id);
+            Customer customer = await Context.Customers.FindAsync(id);
             if (customer == null)
             {
                 return NotFound();
@@ -40,7 +43,7 @@ namespace TimeTracker.Web.Controllers
         [Route("api/Customers/{id}/Projects")]
         public IQueryable<Project> GetProjectsForCustomer(int id)
         {
-            return context.Projects.AsQueryable()
+            return Context.Projects.AsQueryable()
                 .Where(p => p.CustomerId == id)
                 .OrderBy(p => p.Id);
         }
@@ -59,11 +62,11 @@ namespace TimeTracker.Web.Controllers
                 return BadRequest();
             }
 
-            context.SetModified(customer);
+            Context.SetModified(customer);
 
             try
             {
-                await context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -89,8 +92,8 @@ namespace TimeTracker.Web.Controllers
                 return BadRequest(ModelState);
             }
 
-            context.Customers.Add(customer);
-            await context.SaveChangesAsync();
+            Context.Customers.Add(customer);
+            await Context.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = customer.Id }, customer);
         }
@@ -99,14 +102,14 @@ namespace TimeTracker.Web.Controllers
         [ResponseType(typeof(Customer))]
         public async Task<IHttpActionResult> DeleteCustomer(int id)
         {
-            Customer customer = await context.Customers.FindAsync(id);
+            Customer customer = await Context.Customers.FindAsync(id);
             if (customer == null)
             {
                 return NotFound();
             }
 
-            context.Customers.Remove(customer);
-            await context.SaveChangesAsync();
+            Context.Customers.Remove(customer);
+            await Context.SaveChangesAsync();
 
             return Ok(customer);
         }
@@ -115,14 +118,14 @@ namespace TimeTracker.Web.Controllers
         {
             if (disposing)
             {
-                context.Dispose();
+                Context.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool CustomerExists(int id)
         {
-            return context.Customers.Count(e => e.Id == id) > 0;
+            return Context.Customers.Count(e => e.Id == id) > 0;
         }
     }
 }

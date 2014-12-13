@@ -1,9 +1,9 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.Owin.Testing;
+﻿using System.Threading.Tasks;
+using System.Web.Http.Results;
+using Microsoft.AspNet.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using TimeTracker.Model;
 using TimeTracker.Web.Controllers;
 
 namespace TimeTracker.Web.Tests.Controllers
@@ -11,67 +11,44 @@ namespace TimeTracker.Web.Tests.Controllers
     [TestClass]
     public class AccountControllerTest
     {
-        
         [TestMethod]
-        public async Task GetUserInfo()
+        public void AccountController()
         {
-            await RunWithTestServer("/api/Account/UserInfo", HttpStatusCode.Unauthorized, async response =>
-            {
-                var returnValue = await response.Content.ReadAsAsync<object>();
-                Assert.AreEqual(HttpStatusCode.Unauthorized, response.StatusCode, returnValue.ToString());
+            // Arrange
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var manager = new ApplicationUserManager(userStore.Object);
 
-            });
+            // Act
+            var controller = new AccountController(manager, accessTokenFormat: null);
+
+            // Assert
+            Assert.IsNotNull(controller);
         }
 
-        //[TestMethod]
-        //public async Task Register()
-        //{
-
-        //    // Arrange
-        //    var model = new RegisterBindingModel()
-        //        {
-        //            Email = "test@nowhere.com",
-        //            Password = "P@ssword1",
-        //            ConfirmPassword = "P@ssword1"
-        //        };
-
-         
-        //    await RunWithTestServer(async server =>
-        //     {
-        //         // Act
-        //         var response = await server.HttpClient.PostAsJsonAsync("api/Account/Register", model);
-
-        //         // Assert
-        //         Assert.IsNotNull(response);
-        //         var returnValue = await response.Content.ReadAsAsync<object>();
-        //         Assert.AreEqual(HttpStatusCode.OK, response.StatusCode, returnValue.ToString());
-        //     });
-        //}
-
-
-        private static async Task RunWithTestServer(Func<TestServer, Task> test)
+        [TestMethod]
+        public async Task Register()
         {
-            using (var server = TestServer.Create(builder =>
+            // Arrange
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var passwordStore = userStore.As<IUserPasswordStore<ApplicationUser>>();
+            userStore.Setup(store => store.CreateAsync(It.IsAny<ApplicationUser>())).Returns(Task.FromResult(new IdentityResult(new string[] { })));
+            var manager = new ApplicationUserManager(userStore.Object);
+            var controller = new AccountController(manager, accessTokenFormat: null);
+            var model = new RegisterBindingModel
             {
-                var startup = new Startup();
-                builder.Properties.Add("Test", true);
-                startup.Configuration(builder);
-            }))
-            {
-                await test(server);
-            }
-        }
-        
+                Email = "test@nowhere.com",
+                Password = "Password1",
+                ConfirmPassword = "Password1"
+            };
 
-        private static async Task RunWithTestServer(string route, HttpStatusCode expectedStatusCode, Func<HttpResponseMessage, Task> validateResponse = null)
-        {
-            await RunWithTestServer(async server =>
-            {
-                var response = await server.HttpClient.GetAsync(route);
-                Assert.IsNotNull(response);
-                Assert.AreEqual(expectedStatusCode, response.StatusCode, response.ReasonPhrase);
-                if (validateResponse != null) await validateResponse(response);
-            });
+            // Act
+            var result = await controller.Register(model);
+
+            // Assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result is OkResult);
+
         }
+
     }
 }

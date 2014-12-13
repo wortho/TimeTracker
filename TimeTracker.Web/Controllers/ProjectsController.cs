@@ -9,26 +9,29 @@ using TimeTracker.Model;
 namespace TimeTracker.Web.Controllers
 {
     [Authorize]
-    public class ProjectsController : ApiController
+    public class ProjectsController : TimeTrackerController
     {
-        private readonly ITimeTrackerContext context; // = new TimeTrackerContext("DefaultConnection");
+        internal ProjectsController()
+        {
+            // default constructor for activator
+        }
 
         public ProjectsController(ITimeTrackerContext context)
         {
-            this.context = context;
+            this.Context = context;
         }
 
         // GET: api/Projects
         public IQueryable<Project> GetProjects()
         {
-            return context.Projects;
+            return Context.Projects;
         }
 
         // GET: api/Projects/5
         [ResponseType(typeof(Project))]
         public async Task<IHttpActionResult> GetProject(int id)
         {
-            Project project = await context.Projects.FindAsync(id);
+            Project project = await Context.Projects.FindAsync(id);
             if (project == null)
             {
                 return NotFound();
@@ -51,11 +54,11 @@ namespace TimeTracker.Web.Controllers
                 return BadRequest();
             }
 
-            context.SetModified(project);
+            Context.SetModified(project);
 
             try
             {
-                await context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -81,8 +84,8 @@ namespace TimeTracker.Web.Controllers
                 return BadRequest(ModelState);
             }
 
-            context.Projects.Add(project);
-            await context.SaveChangesAsync();
+            Context.Projects.Add(project);
+            await Context.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = project.Id }, project);
         }
@@ -91,14 +94,14 @@ namespace TimeTracker.Web.Controllers
         [ResponseType(typeof(Project))]
         public async Task<IHttpActionResult> DeleteProject(int id)
         {
-            Project project = await context.Projects.FindAsync(id);
+            Project project = await Context.Projects.FindAsync(id);
             if (project == null)
             {
                 return NotFound();
             }
 
-            context.Projects.Remove(project);
-            await context.SaveChangesAsync();
+            Context.Projects.Remove(project);
+            await Context.SaveChangesAsync();
 
             return Ok(project);
         }
@@ -107,27 +110,27 @@ namespace TimeTracker.Web.Controllers
         {
             if (disposing)
             {
-                context.Dispose();
+                Context.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool ProjectExists(int id)
         {
-            return context.Projects.Count(e => e.Id == id) > 0;
+            return Context.Projects.Count(e => e.Id == id) > 0;
         }
 
 
         [Route("api/Projects/{id}/TimeEntries")]
         public async Task<IHttpActionResult> GetTimeEntriesForProject(int id)
         {
-            Project project = await context.Projects.FindAsync(id);
+            Project project = await Context.Projects.FindAsync(id);
             if (project == null)
             {
                 return NotFound();
             }
 
-            await context.Entry(project).Collection("TimeEntries").LoadAsync();
+            await Context.Entry(project).Collection("TimeEntries").LoadAsync();
 
             return Ok(project.TimeEntries);
         }

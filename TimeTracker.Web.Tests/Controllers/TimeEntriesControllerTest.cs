@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
+using Microsoft.AspNet.Identity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using TimeTracker.Web.Controllers;
@@ -86,18 +85,23 @@ namespace TimeTracker.Web.Tests.Controllers
         }
 
         [TestMethod]
-        public async Task Post()
+        public async Task PostCreatesTimeEntryForCurrentUser()
         {
             // Arrange
             var context = CreateTestContextMock();
-            var controller = new TimeEntriesController(context.Object);
+            var userStore = new Mock<IUserStore<ApplicationUser>>();
+            var manager = new ApplicationUserManager(userStore.Object);
+            const string userId = "TestUserId";
+            var controller = new TimeEntriesController(context.Object)
+            {
+                GetCurrentUserId = () => userId
+            };
 
             var project22 = new TimeEntry
             {
                 Id = 220,
                 ProjectId = 22,
-                Description = "Test",
-                User = new ApplicationUser() {UserName = "Test1"}
+                Description = "TestEntry"
             };
 
             // Act
@@ -105,7 +109,10 @@ namespace TimeTracker.Web.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(actionResult);
-            //Assert.IsTrue(actionResult is OkNegotiatedContentResult<Customer>);
+            Assert.IsTrue(actionResult is CreatedAtRouteNegotiatedContentResult<TimeEntry>);
+            var newEntry = (actionResult as CreatedAtRouteNegotiatedContentResult<TimeEntry>).Content;
+            Assert.IsNotNull(newEntry);
+            Assert.AreEqual(userId, newEntry.UserId);
         }
 
 

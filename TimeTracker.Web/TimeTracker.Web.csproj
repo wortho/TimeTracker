@@ -195,7 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppBuilderExtensions.cs" />
-    <Compile Include="App_Start\AppDependencyResolver.cs" />
+    <Compile Include="App_Start\ApplicationUserManager.cs" />
     <Compile Include="App_Start\SimpleLogger.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UserManagerFactory.cs" />
@@ -204,6 +204,7 @@
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Controllers\TimeEntriesController.cs" />
+    <Compile Include="Controllers\TimeTrackerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />

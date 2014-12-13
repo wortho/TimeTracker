@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using TimeTracker.Model;
 
-namespace TimeTracker.Web.Tests.Controllers
+namespace TimeTracker.Web.Tests
 {
     internal static class TestModelData
     {

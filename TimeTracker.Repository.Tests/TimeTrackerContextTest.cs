@@ -52,11 +52,9 @@ namespace TimeTracker.Repository.Tests
 
             var proj = cust.Projects.First();
 
-            var user = await CreateUserIfNotExists(context, "test@test.com");
-
             for (int i = 0; i < 4; i++)
             {
-                TimeEntry entry = new TimeEntry() { ProjectId = proj.Id, UserId = user.Id, StartTime = DateTime.Now, EndTime = DateTime.UtcNow };
+                var entry = new TimeEntry() { ProjectId = proj.Id, StartTime = DateTime.Now, EndTime = DateTime.UtcNow };
                 context.TimeEntries.Add(entry);
             }
             await context.SaveChangesAsync();
@@ -71,43 +69,11 @@ namespace TimeTracker.Repository.Tests
             Assert.AreEqual<int>(4, proj.TimeEntries.Count);
 
             TimeEntry t = proj.TimeEntries.First();
-            context.Entry(t).Reference(e => e.User).Load();
-
-            Assert.AreEqual<string>(user.UserName, t.User.UserName);
 
             context.Entry(t).Reference(e => e.Project).Load();
             Assert.AreEqual<int>(t.Project.Id, proj.Id);
         }
 
-        [TestMethod]
-        public async Task CreateNewUser()
-        {
-            TimeTrackerContext context = new TimeTrackerContext("TestConnection");
-            Assert.IsNotNull(context);
-
-            var result = await CreateUserIfNotExists(context, "test123@test.com");
-            Assert.IsNotNull(result);
-
-
-        }
-
-        private static async Task<ApplicationUser> CreateUserIfNotExists(TimeTrackerContext context, string userEmail)
-        {
-            var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context));
-
-            var user = await manager.FindByEmailAsync(userEmail);
-            if (user == null)
-            {
-
-                // create new test user
-                user = new ApplicationUser() { UserName = userEmail, Email = userEmail };
-
-                IdentityResult result = await manager.CreateAsync(user, "P@ssword1");
-                Assert.IsTrue(result.Succeeded);
-                context.Users.Remove(user);
-                await context.SaveChangesAsync();
-            }
-            return user;
-        }
+        
     }
 }

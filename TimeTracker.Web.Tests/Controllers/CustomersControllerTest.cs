@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -14,6 +13,19 @@ namespace TimeTracker.Web.Tests.Controllers
     [TestClass]
     public class CustomersControllerTest
     {
+        [TestMethod]
+        public void CustomersController()
+        {
+            // Arrange
+            var context = CreateTestCustomerSet();
+
+            // Act
+            var controller = new CustomersController(context.Object);
+
+            // Assert
+            Assert.IsNotNull(controller);
+        }
+
         [TestMethod]
         public async Task Get()
         {
@@ -103,7 +115,9 @@ namespace TimeTracker.Web.Tests.Controllers
 
             // Assert
             Assert.IsNotNull(actionResult);
-            //Assert.IsTrue(actionResult is OkNegotiatedContentResult<Customer>);
+            Assert.IsTrue(actionResult is CreatedAtRouteNegotiatedContentResult<Customer>);
+            var newCustomer = (actionResult as CreatedAtRouteNegotiatedContentResult<Customer>).Content;
+            Assert.IsNotNull(newCustomer);
         }
 
         [TestMethod]
