@@ -27,7 +27,7 @@
                     Start Time:
                 </div>
                 <div class="col-md-10">
-                    <input type="datetime" name="Start" class="form-control" data-ng-model="timeEntry.StartTime" required placeholder="08:00"/>
+                    <input type="datetime" name="Start" class="form-control" data-ng-model="timeEntry.StartTime" required placeholder=" 2014-12-12T09:00:00 " />
                     <span class="errorMessage" ng-show="editForm.StartTime.$touched && editForm.StartTime.$invalid">
                         Start Time is required
                     </span>
@@ -36,7 +36,7 @@
                     End Time:
                 </div>
                 <div class="col-md-10">
-                    <input type="datetime" name="End" class="form-control" data-ng-model="timeEntry.EndTime" required placeholder="16:00" />
+                    <input type="datetime" name="End" class="form-control" data-ng-model="timeEntry.EndTime" required placeholder=" 2014-12-12T16:00:00 " />
                     <span class="errorMessage" ng-show="editForm.EndTime.$touched && editForm.EndTime.$invalid">
                         End Time is required 
                     </span>

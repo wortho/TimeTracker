@@ -240,6 +240,8 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\app\aboutController.js" />
+    <Content Include="Scripts\app\routeConfigSpec.js" />
+    <Content Include="Scripts\app\timeEntriesControllerSpec.js" />
     <Content Include="Scripts\app\customersControllerSpec.js" />
     <Content Include="Scripts\app\indexControllerSpec.js" />
     <Content Include="Scripts\app\homeControllerSpec.js" />
