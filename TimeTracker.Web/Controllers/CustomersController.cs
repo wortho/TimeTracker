@@ -1,7 +1,10 @@
 ﻿using System.Data.Entity.Infrastructure;
+using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TimeTracker.Model;
@@ -22,8 +25,10 @@ namespace TimeTracker.Web.Controllers
         }
 
         // GET: api/Customers
+        [HttpGet]
         public IQueryable<Customer> GetCustomers()
         {
+            SetNoCacheHeader();
             return Context.Customers;
         }
 
@@ -31,6 +36,7 @@ namespace TimeTracker.Web.Controllers
         [ResponseType(typeof(Customer))]
         public async Task<IHttpActionResult> GetCustomer(int id)
         {
+            SetNoCacheHeader();
             Customer customer = await Context.Customers.FindAsync(id);
             if (customer == null)
             {
@@ -43,6 +49,7 @@ namespace TimeTracker.Web.Controllers
         [Route("api/Customers/{id}/Projects")]
         public IQueryable<Project> GetProjectsForCustomer(int id)
         {
+            SetNoCacheHeader();
             return Context.Projects.AsQueryable()
                 .Where(p => p.CustomerId == id)
                 .OrderBy(p => p.Id);

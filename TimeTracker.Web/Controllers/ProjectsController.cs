@@ -24,6 +24,7 @@ namespace TimeTracker.Web.Controllers
         // GET: api/Projects
         public IQueryable<Project> GetProjects()
         {
+            SetNoCacheHeader();
             return Context.Projects;
         }
 
@@ -31,6 +32,7 @@ namespace TimeTracker.Web.Controllers
         [ResponseType(typeof(Project))]
         public async Task<IHttpActionResult> GetProject(int id)
         {
+            SetNoCacheHeader();
             Project project = await Context.Projects.FindAsync(id);
             if (project == null)
             {
@@ -124,6 +126,7 @@ namespace TimeTracker.Web.Controllers
         [Route("api/Projects/{id}/TimeEntries")]
         public async Task<IHttpActionResult> GetTimeEntriesForProject(int id)
         {
+            SetNoCacheHeader();
             Project project = await Context.Projects.FindAsync(id);
             if (project == null)
             {

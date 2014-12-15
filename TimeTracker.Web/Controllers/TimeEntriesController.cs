@@ -28,6 +28,7 @@ namespace TimeTracker.Web.Controllers
         // GET: api/TimeEntries
         public IQueryable<TimeEntry> GetTimeEntries()
         {
+            SetNoCacheHeader();
             return Context.TimeEntries;
         }
 
@@ -35,6 +36,7 @@ namespace TimeTracker.Web.Controllers
         [ResponseType(typeof(TimeEntry))]
         public async Task<IHttpActionResult> GetTimeEntry(int id)
         {
+            SetNoCacheHeader();
             TimeEntry timeEntry = await Context.TimeEntries.FindAsync(id);
             if (timeEntry == null)
             {
